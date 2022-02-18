@@ -3,6 +3,7 @@ package me.joshua.ming_board_villege.domain.member.dto.request;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import me.joshua.ming_board_villege.global.common.enumerate.Gender;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -31,5 +32,9 @@ public class MemberDto {
         @NotBlank
         @Pattern(regexp = MEMBER_PASSWORD_REGEXP)
         private String password;
+
+        private Long age;
+
+        private Gender gender;
     }
 }
