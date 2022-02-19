@@ -1,0 +1,11 @@
+### 회원가입
+POST {{host}}/members
+Content-Type: application/json; charset=utf-8
+
+{
+  "name": "김민재",
+  "email": "3mins1@naver.com",
+  "password": "qqqq1111",
+  "age": 31,
+  "gender": "MALE"
+}

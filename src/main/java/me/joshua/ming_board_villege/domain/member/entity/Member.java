@@ -1,10 +1,12 @@
 package me.joshua.ming_board_villege.domain.member.entity;
 
 import lombok.*;
+import me.joshua.ming_board_villege.domain.member.dto.request.MemberRequestDto;
 import me.joshua.ming_board_villege.global.common.base.BaseTime;
 import me.joshua.ming_board_villege.global.common.enumerate.Gender;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Getter
 @Entity
@@ -30,5 +32,15 @@ public class Member extends BaseTime {
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
+
+    public static Member toEntity (@NotNull MemberRequestDto.Signup request) {
+        return Member.builder()
+                .name(request.getName())
+                .email(request.getEmail())
+                .password(request.getPassword())
+                .age(request.getAge())
+                .gender(request.getGender())
+                .build();
+    }
 
 }

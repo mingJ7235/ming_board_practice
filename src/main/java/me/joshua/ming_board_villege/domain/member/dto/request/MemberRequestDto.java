@@ -5,16 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.joshua.ming_board_villege.global.common.enumerate.Gender;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 import static me.joshua.ming_board_villege.global.common.constant.Validation.MEMBER_EMAIL_REGEXP;
 import static me.joshua.ming_board_villege.global.common.constant.Validation.MEMBER_PASSWORD_REGEXP;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class MemberDto {
+public class MemberRequestDto {
 
     //회원가입 DTO
     @Getter
@@ -33,8 +30,10 @@ public class MemberDto {
         @Pattern(regexp = MEMBER_PASSWORD_REGEXP)
         private String password;
 
+        @NotNull
         private Long age;
 
+        @NotNull
         private Gender gender;
     }
 }
