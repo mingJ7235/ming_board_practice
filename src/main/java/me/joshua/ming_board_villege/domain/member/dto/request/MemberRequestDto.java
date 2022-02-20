@@ -40,4 +40,24 @@ public class MemberRequestDto {
         @NotNull
         private MBTI mbti;
     }
+
+    //정보수정 DTO
+    @Getter
+    @NoArgsConstructor (access = AccessLevel.PRIVATE)
+    public static class Update {
+
+        @NotBlank
+        @Size(min = 1, max = 20)
+        private String name;
+
+        @NotNull
+        private Long age;
+
+        @NotNull
+        private Gender gender;
+
+        @NotNull
+        private MBTI mbti;
+
+    }
 }

@@ -5,11 +5,13 @@ import me.joshua.ming_board_villege.domain.member.dto.request.MemberRequestDto;
 import me.joshua.ming_board_villege.global.common.base.BaseTime;
 import me.joshua.ming_board_villege.global.common.enumerate.Gender;
 import me.joshua.ming_board_villege.global.common.enumerate.MBTI;
+import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Getter
+@Setter (AccessLevel.PRIVATE)
 @Entity
 @Builder
 @NoArgsConstructor (access = AccessLevel.PROTECTED)
@@ -38,7 +40,7 @@ public class Member extends BaseTime {
     @Enumerated (EnumType.STRING)
     private MBTI mbti;
 
-    public static Member toEntity (@NotNull MemberRequestDto.Signup request) {
+    public static Member toEntity (final MemberRequestDto.@NotNull Signup request) {
         return Member.builder()
                 .name(request.getName())
                 .email(request.getEmail())
@@ -47,6 +49,23 @@ public class Member extends BaseTime {
                 .gender(request.getGender())
                 .mbti(request.getMbti())
                 .build();
+    }
+
+    public Member update (final MemberRequestDto.@NotNull Update request) {
+
+        if(StringUtils.hasText(request.getName()))
+            this.setName(request.getName());
+
+        if(request.getAge() != null)
+            this.setAge(request.getAge());
+
+        if(request.getGender() != null)
+            this.setGender(request.getGender());
+
+        if(request.getMbti() != null)
+            this.setMbti(request.getMbti());
+
+        return this;
     }
 
 }

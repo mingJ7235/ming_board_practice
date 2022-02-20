@@ -40,5 +40,14 @@ public class MemberController {
                 .ok(memberService.findAll());
     }
 
+    //내정보 수정
+    @PatchMapping ("/members/{id}")
+    public ResponseEntity<MemberResponseDto.Response> updateById (@PathVariable Long id,
+                                                                  @RequestBody MemberRequestDto.Update request) {
+        //검증 로직
+        return ResponseEntity
+                .ok(memberService.updateById(id, request));
+    }
+
 
 }
