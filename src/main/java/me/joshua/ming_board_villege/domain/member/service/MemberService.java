@@ -9,9 +9,9 @@ import me.joshua.ming_board_villege.domain.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -22,7 +22,12 @@ public class MemberService {
     private final MemberRepository memberRepository;
 
     @Transactional
-    public MemberResponseDto.Response signup (@NotNull MemberRequestDto.Signup request) {
+    public MemberResponseDto.Response signup (final MemberRequestDto.@NotNull Signup request) {
+
+        //email 중복 검증
+        if (checkEmailDuplication(request.getEmail()))
+            throw new RuntimeException(); //FIXME : Exception 정리해야함
+
         return MemberResponseDto.Response.from(memberRepository.save(Member.toEntity(request)));
     }
 
@@ -46,6 +51,11 @@ public class MemberService {
         member.update(request);
 
         return MemberResponseDto.Response.from(member);
+    }
+
+    //이메일 중복 검증 로직
+    private boolean checkEmailDuplication (final @NotBlank String email) {
+        return memberRepository.existsByEmail(email);
     }
 
 }

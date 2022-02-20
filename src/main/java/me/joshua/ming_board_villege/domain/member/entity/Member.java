@@ -1,6 +1,7 @@
 package me.joshua.ming_board_villege.domain.member.entity;
 
 import lombok.*;
+import me.joshua.ming_board_villege.domain.board.entity.Board;
 import me.joshua.ming_board_villege.domain.member.dto.request.MemberRequestDto;
 import me.joshua.ming_board_villege.global.common.base.BaseTime;
 import me.joshua.ming_board_villege.global.common.enumerate.Gender;
@@ -9,6 +10,7 @@ import org.springframework.util.StringUtils;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Getter
 @Setter (AccessLevel.PRIVATE)
@@ -40,6 +42,9 @@ public class Member extends BaseTime {
     @Enumerated (EnumType.STRING)
     private MBTI mbti;
 
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "owner")
+    private List<Board> boardList;
+
     public static Member toEntity (final MemberRequestDto.@NotNull Signup request) {
         return Member.builder()
                 .name(request.getName())
@@ -51,7 +56,7 @@ public class Member extends BaseTime {
                 .build();
     }
 
-    public Member update (final MemberRequestDto.@NotNull Update request) {
+    public void update (final MemberRequestDto.@NotNull Update request) {
 
         if(StringUtils.hasText(request.getName()))
             this.setName(request.getName());
@@ -64,8 +69,6 @@ public class Member extends BaseTime {
 
         if(request.getMbti() != null)
             this.setMbti(request.getMbti());
-
-        return this;
     }
 
 }
