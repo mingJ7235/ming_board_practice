@@ -4,6 +4,7 @@ import lombok.*;
 import me.joshua.ming_board_villege.domain.member.dto.request.MemberRequestDto;
 import me.joshua.ming_board_villege.global.common.base.BaseTime;
 import me.joshua.ming_board_villege.global.common.enumerate.Gender;
+import me.joshua.ming_board_villege.global.common.enumerate.MBTI;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -33,6 +34,10 @@ public class Member extends BaseTime {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Column (nullable = false)
+    @Enumerated (EnumType.STRING)
+    private MBTI mbti;
+
     public static Member toEntity (@NotNull MemberRequestDto.Signup request) {
         return Member.builder()
                 .name(request.getName())
@@ -40,6 +45,7 @@ public class Member extends BaseTime {
                 .password(request.getPassword())
                 .age(request.getAge())
                 .gender(request.getGender())
+                .mbti(request.getMbti())
                 .build();
     }
 

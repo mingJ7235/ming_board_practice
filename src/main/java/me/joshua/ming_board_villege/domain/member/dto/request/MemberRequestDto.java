@@ -4,6 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import me.joshua.ming_board_villege.global.common.enumerate.Gender;
+import me.joshua.ming_board_villege.global.common.enumerate.MBTI;
 
 import javax.validation.constraints.*;
 
@@ -35,5 +36,8 @@ public class MemberRequestDto {
 
         @NotNull
         private Gender gender;
+
+        @NotNull
+        private MBTI mbti;
     }
 }
