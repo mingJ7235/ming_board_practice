@@ -2,6 +2,7 @@ package me.joshua.ming_board_villege.domain.board.entity;
 
 import lombok.*;
 import me.joshua.ming_board_villege.domain.member.entity.Member;
+import me.joshua.ming_board_villege.global.common.enumerate.MBTI;
 
 import javax.persistence.*;
 
@@ -22,6 +23,10 @@ public class Board {
 
     @Column (nullable = false)
     private String content;
+
+    @Enumerated (EnumType.STRING)
+    @Column (nullable = false)
+    private MBTI mbti;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "member_id")
