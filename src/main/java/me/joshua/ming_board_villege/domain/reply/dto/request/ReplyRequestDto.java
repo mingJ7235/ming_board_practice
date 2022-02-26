@@ -15,7 +15,6 @@ public class ReplyRequestDto {
 
         private Long writerId;
 
-
     }
 
 }
