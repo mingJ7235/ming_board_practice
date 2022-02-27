@@ -1,8 +1,10 @@
 package me.joshua.ming_board_villege.domain.reply.entity;
 
 import lombok.*;
+import me.joshua.ming_board_villege.domain.board.entity.Board;
 import me.joshua.ming_board_villege.domain.member.entity.Member;
 import me.joshua.ming_board_villege.domain.reply.dto.request.ReplyRequestDto;
+import me.joshua.ming_board_villege.domain.reply.dto.response.ReplyResponseDto;
 import me.joshua.ming_board_villege.global.common.base.BaseTime;
 
 import javax.persistence.*;
@@ -24,13 +26,17 @@ public class Reply extends BaseTime {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn
-    private Member member;
+    private Member writer;
 
-    public static Reply from (final @NotNull ReplyRequestDto.Create request) {
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn
+    private Board board;
+
+    public static Reply from (final ReplyRequestDto.@NotNull Create request) {
         return Reply.builder()
-                .id()
-                .content()
-                .member()
+                .content(request.getContent())
+                .writer(request.getWriter())
+                .board(request.getBoard())
                 .build();
     }
 
