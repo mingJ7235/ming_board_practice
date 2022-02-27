@@ -2,6 +2,7 @@ package me.joshua.ming_board_villege.domain.reply.service.core;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import me.joshua.ming_board_villege.domain.reply.dto.request.ReplyRequestDto;
 import me.joshua.ming_board_villege.domain.reply.dto.response.ReplyResponseDto;
 import me.joshua.ming_board_villege.domain.reply.entity.Reply;
 import me.joshua.ming_board_villege.domain.reply.repository.ReplyRepository;
@@ -21,6 +22,10 @@ public class ReplyService {
     public Reply findById(final @NotNull Long id) {
         return replyRepository.findById(id)
                         .orElseThrow(() -> new IllegalArgumentException("not found reply id"));
+    }
+
+    public Reply save (final @NotNull Reply reply) {
+        return replyRepository.save(reply);
     }
 
 }
