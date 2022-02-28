@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -25,6 +26,11 @@ public class ReplyService {
     public Reply findById(final @NotNull Long id) {
         return replyRepository.findById(id)
                         .orElseThrow(() -> new IllegalArgumentException("not found reply id"));
+    }
+
+    @Transactional (readOnly = true)
+    public List<Reply> findAllByBoardId (final @NotNull Long boardId) {
+        return replyRepository.findAllByBoardId(boardId);
     }
 
 }

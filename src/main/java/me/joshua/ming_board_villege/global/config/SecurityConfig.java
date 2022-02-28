@@ -1,14 +1,12 @@
 package me.joshua.ming_board_villege.global.config;
 
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SecurityConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -17,8 +15,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 //    private final CustomOAuth2UserService customOAuth2UserService;
 
-    @Override
-    protected void configure(final HttpSecurity http) throws Exception {
+//    @Override
+//    protected void configure(final HttpSecurity http) throws Exception {
 //        http
 //                .csrf().disable()
 //                .headers().frameOptions().disable()
@@ -26,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .authorizeRequests()
 //                .antMatchers("/", "/css/**", "/images/**", "/js/**","/auth/**").permitAll()
 //                .antMatchers("/boards/**").hasRole(Ro)
-    }
+//    }
 
 }
 

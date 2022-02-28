@@ -27,7 +27,7 @@ public class ReplyResponseDto {
         public static Response from (final @NotNull Reply reply) {
             return Response.builder()
                     .id(reply.getId())
-                    .memberId(reply.getMember().getId())
+                    .memberId(reply.getWriter().getId())
                     .content(reply.getContent())
                     .createdTime(reply.getCreatedTime())
                     .updatedTime(reply.getUpdatedTime())
