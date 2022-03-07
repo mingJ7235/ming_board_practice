@@ -5,7 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 import me.joshua.ming_board_villege.domain.board.dto.request.BoardRequestDto;
 import me.joshua.ming_board_villege.domain.board.dto.response.BoardResponseDto;
 import me.joshua.ming_board_villege.domain.board.service.core.BoardService;
-import me.joshua.ming_board_villege.domain.member.entity.Member;
 import me.joshua.ming_board_villege.domain.member.service.core.MemberService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +21,6 @@ public class BoardCreateService {
     private final MemberService memberService;
     @Transactional
     public BoardResponseDto.Response create(final @NotNull Long memberId, final BoardRequestDto.@NotNull Create request) {
-        Member member = memberService.findById(memberId);
-        return null;
+        return BoardResponseDto.Response.from(boardService.create(request));
     }
 }

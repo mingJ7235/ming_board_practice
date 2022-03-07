@@ -20,7 +20,7 @@ public class BoardRequestDto {
 
         private LocalDateTime createdDate;
 
-        private Member writer;
+        private Long memberId;
 
     }
 }

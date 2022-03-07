@@ -23,9 +23,15 @@ public class BoardResponseDto {
 
         private MBTI mbti;
 
-        public Response from (final @NotNull Board board) {
-            return Response.builder().build();
+        public static Response from (final @NotNull Board board) {
+            return Response.builder()
+                    .id(board.getId())
+                    .subject(board.getSubject())
+                    .content(board.getContent())
+                    .mbti(board.getMbti())
+                    .build();
         }
 
     }
+
 }
