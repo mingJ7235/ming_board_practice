@@ -6,6 +6,7 @@ import me.joshua.ming_board_villege.domain.member.dto.request.MemberRequestDto;
 import me.joshua.ming_board_villege.domain.member.dto.response.MemberResponseDto;
 import me.joshua.ming_board_villege.domain.member.entity.Member;
 import me.joshua.ming_board_villege.domain.member.repository.MemberRepository;
+import me.joshua.ming_board_villege.domain.member.service.core.MemberService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,15 +22,7 @@ public class MemberFindService {
 
     private final MemberRepository memberRepository;
 
-    @Transactional
-    public MemberResponseDto.Response signup (final MemberRequestDto.@NotNull Signup request) {
-
-        //email 중복 검증
-        if (checkEmailDuplication(request.getEmail()))
-            throw new RuntimeException(); //FIXME : Exception 정리해야함
-
-        return MemberResponseDto.Response.from(memberRepository.save(Member.toEntity(request)));
-    }
+    private final MemberService memberService;
 
     @Transactional (readOnly = true)
     public MemberResponseDto.Response findById(@NotNull final Long id) {
@@ -51,11 +44,6 @@ public class MemberFindService {
         member.update(request);
 
         return MemberResponseDto.Response.from(member);
-    }
-
-    //이메일 중복 검증 로직
-    private boolean checkEmailDuplication (final @NotBlank String email) {
-        return memberRepository.existsByEmail(email);
     }
 
 }

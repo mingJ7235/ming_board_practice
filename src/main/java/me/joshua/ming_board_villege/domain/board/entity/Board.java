@@ -12,31 +12,31 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Getter
-@Setter (AccessLevel.PRIVATE)
+@Setter(AccessLevel.PRIVATE)
 @SuperBuilder
-@NoArgsConstructor (access = AccessLevel.PROTECTED)
-@AllArgsConstructor (access = AccessLevel.PRIVATE)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class Board extends BaseTime {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String subject;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String content;
 
-    @Enumerated (EnumType.STRING)
-    @Column (nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private MBTI mbti;
 
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "member_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     private Member writer;
 
-    public static Board toEntity (final BoardRequestDto.@NotNull Create request) {
+    public static Board create(final BoardRequestDto.@NotNull Create request) {
         return Board.builder()
                 .subject(request.getSubject())
                 .content(request.getContent())
@@ -45,10 +45,11 @@ public class Board extends BaseTime {
     }
 
     //FIXME : update logic (this logic should be checked before deploy)
-    public static Board update (final @NotNull Board board,
-                                final BoardRequestDto.@NotNull Update request) {
+    public static Board update(final @NotNull Board board,
+                               final BoardRequestDto.@NotNull Update request) {
         board.setSubject(request.getSubject());
         board.setContent(request.getContent());
         return board;
     }
+
 }

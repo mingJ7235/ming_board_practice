@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import me.joshua.ming_board_villege.domain.board.dto.request.BoardRequestDto;
 import me.joshua.ming_board_villege.domain.board.dto.response.BoardResponseDto;
 import me.joshua.ming_board_villege.domain.board.service.BoardCreateService;
+import me.joshua.ming_board_villege.domain.board.service.BoardDeleteService;
 import me.joshua.ming_board_villege.domain.board.service.BoardFindService;
 import me.joshua.ming_board_villege.domain.board.service.BoardModifyService;
 import me.joshua.ming_board_villege.global.common.enumerate.MBTI;
@@ -25,6 +26,8 @@ public class BoardController {
     private final BoardFindService findService;
 
     private final BoardModifyService modifyService;
+
+    private final BoardDeleteService deleteService;
 
     //게시판 등록
     @PostMapping ("/boards")
@@ -56,5 +59,14 @@ public class BoardController {
                                                                  final BoardRequestDto.@NotNull Update request) {
         return ResponseEntity
                 .ok(modifyService.update(id, request));
+    }
+
+    //게시판 삭제
+    @DeleteMapping ("/boards/{id}")
+    public ResponseEntity<?> deleteById (final @PathVariable Long id) {
+        deleteService.deleteById(id);
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 }

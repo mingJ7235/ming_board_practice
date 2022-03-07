@@ -23,10 +23,6 @@ public class BoardService {
 
     private final QueryBoardRepository queryBoardRepository;
 
-    public Board create (final BoardRequestDto.@NotNull Create request) {
-        return boardRepository.save(Board.toEntity(request));
-    }
-
     @Transactional (readOnly = true)
     public Board findById (final @NotNull Long id) {
         return boardRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("not found board id"));
@@ -37,9 +33,17 @@ public class BoardService {
         return queryBoardRepository.findAllByMbti(mbti);
     }
 
-    public Board update(final @NotNull Long boardId,
-                        final BoardRequestDto.@NotNull Update request) {
+    public Board create (final BoardRequestDto.@NotNull Create request) {
+        return boardRepository.save(Board.create(request));
+    }
+
+    public Board updateById(final @NotNull Long boardId,
+                            final BoardRequestDto.@NotNull Update request) {
         return Board.update(findById(boardId), request);
+    }
+
+    public void deleteById(final @NotNull Long boardId) {
+        boardRepository.deleteById(boardId);
     }
 
 }
