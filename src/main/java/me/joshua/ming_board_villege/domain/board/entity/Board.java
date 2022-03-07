@@ -40,8 +40,15 @@ public class Board extends BaseTime {
         return Board.builder()
                 .subject(request.getSubject())
                 .content(request.getContent())
-                .writer(request.getWriter())
                 .createdTime(request.getCreatedDate())
                 .build();
+    }
+
+    //FIXME : update logic (this logic should be checked before deploy)
+    public static Board update (final @NotNull Board board,
+                                final BoardRequestDto.@NotNull Update request) {
+        board.setSubject(request.getSubject());
+        board.setContent(request.getContent());
+        return board;
     }
 }

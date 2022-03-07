@@ -10,6 +10,4 @@ public class Validation {
 
     public final static String MEMBER_PASSWORD_REGEXP = "(?=.*[A-Za-z])(?=.*[0-9]).{8,15}";
 
-    public final static String MEMBER_PASSWORD_REGEXP_DEFAULT_MESSAGE = "must be a well-formed password";
-
 }

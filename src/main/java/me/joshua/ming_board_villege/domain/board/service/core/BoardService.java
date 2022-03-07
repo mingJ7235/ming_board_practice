@@ -37,4 +37,9 @@ public class BoardService {
         return queryBoardRepository.findAllByMbti(mbti);
     }
 
+    public Board update(final @NotNull Long boardId,
+                        final BoardRequestDto.@NotNull Update request) {
+        return Board.update(findById(boardId), request);
+    }
+
 }

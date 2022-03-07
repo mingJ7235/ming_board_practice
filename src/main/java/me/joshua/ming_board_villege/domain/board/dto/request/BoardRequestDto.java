@@ -23,4 +23,14 @@ public class BoardRequestDto {
         private Long memberId;
 
     }
+
+    @Getter
+    @NoArgsConstructor (access = AccessLevel.PRIVATE)
+    public static class Update {
+
+        private String subject;
+
+        private String content;
+
+    }
 }
