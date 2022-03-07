@@ -42,7 +42,7 @@ public class Member extends BaseTime {
     @Enumerated (EnumType.STRING)
     private MBTI mbti;
 
-    @OneToMany (cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany (cascade = CascadeType.ALL, mappedBy = "writer")
     private List<Board> boardList;
 
     public static Member toEntity (final MemberRequestDto.@NotNull Signup request) {
